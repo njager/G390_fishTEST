@@ -4,11 +4,13 @@ namespace Invector.vCharacterController
 {
     public class vThirdPersonController : vThirdPersonAnimator
     {
-        //public variables
+        //public variables - begin new
         public Camera playerCam;
         public Camera netCam;
         public GameObject net;
-
+        /// <summary>
+        /// if press escape (while in the net mode) unlocks movement
+        /// </summary>
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Escape))
@@ -20,6 +22,7 @@ namespace Invector.vCharacterController
                 net.gameObject.SetActive(false);
             }
         }
+        //end new
 
         public virtual void ControlAnimatorRootMotion()
         {
@@ -141,7 +144,11 @@ namespace Invector.vCharacterController
             else
                 animator.CrossFadeInFixedTime("JumpMove", .2f);
         }
-
+        //begin new
+        /// <summary>
+        /// When collide with the trigger pad, lock movement and switch cams
+        /// </summary>
+        /// <param name="other"></param>
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Pad"))
@@ -153,5 +160,6 @@ namespace Invector.vCharacterController
                 net.gameObject.SetActive(true);
             }
         }
+        //end new
     }
 }
